@@ -1,0 +1,16 @@
+{
+  "name": "react-native-eagleeye",
+  "version": "1.0.0",
+  "description": "Get device information & auto track event",
+  "main": "src/index",
+  "author": "CLChater <> (https://github.com/CLChater)",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/CLChater/react-native-eagleeye.git",
+  "scripts": {
+    "posttrack": "node node_modules/react-native-eagleeye/HawkeyeDataRNHook.js -run"
+  },
+  "devDependencies": {
+    "react": "18.2.0",
+    "react-native": "0.72.6"
+  }
+}
