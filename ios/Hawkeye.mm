@@ -146,7 +146,7 @@ RCT_EXPORT_METHOD(cleanAllUserProperties){
 
 
 /// 手动事件RN传过来的
-RCT_EXPORT_METHOD(trackEvent:(NSString *)eventName trackJson:(NSString *)trackJson isReport:(BOOL)isReport){
+RCT_EXPORT_METHOD(trackEvent:(NSString *)eventName trackJson:(NSString *)trackJson){
     @try {
     
 #ifdef DEBUG
@@ -155,21 +155,11 @@ RCT_EXPORT_METHOD(trackEvent:(NSString *)eventName trackJson:(NSString *)trackJs
 //            NSDictionary *properties = [STRNEventProperty eventProperties:propertyDict];
 //            [[STRNManager sharedInstance] trackWithEventName:eventName properties: properties trackType: STDB_TYPE_TRACK_MANUAL];
 //        }
-//
-//        if(isReport) {
-//            // 异步上传
-//            [[STRNManager sharedInstance] reportEvent];
-//        }
 #else
         if (trackJson.length > 0) {
             NSDictionary *propertyDict = [JSONUtils jsonStringToDictionary:trackJson];
             NSDictionary *properties = [STRNEventProperty eventProperties:propertyDict];
             [[STRNManager sharedInstance] trackWithEventName:eventName properties: properties trackType: STDB_TYPE_TRACK_MANUAL];
-        }
-
-        if(isReport) {
-            // 异步上传
-            [[STRNManager sharedInstance] reportEvent];
         }
 #endif
 
