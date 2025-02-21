@@ -67,7 +67,7 @@ RCT_EXPORT_METHOD(init:(NSString *)applyKey
 #ifdef DEBUG
 
 //        BOOL success = [[STRNManager sharedInstance] initializeWithAppKey:applyKey];
-//        
+//
 //        if (success) {
 //            // 返回初始化成功的信息
 //            NSMutableDictionary *resultMap = [NSMutableDictionary dictionary];
@@ -101,7 +101,6 @@ RCT_EXPORT_METHOD(init:(NSString *)applyKey
         reject(@"NATIVE_ERROR_CODE", exception.reason, nil);
     }
 }
-
 
 /// 设置用户属性
 RCT_EXPORT_METHOD(userProperty:(NSString *)key value:(NSString *)value){
@@ -220,6 +219,23 @@ RCT_EXPORT_METHOD(trackViewScreen:(NSDictionary *)params) {
 
 
 
+RCT_EXPORT_METHOD(getId:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+    @try {
+        
+#ifdef DEBUG
+//        NSString *idStr = [[STRNManager sharedInstance] getId];
+//        resolve(idStr);  // 返回结果
+#else
+        NSString *idStr = [[STRNManager sharedInstance] getId];
+        resolve(idStr);  // 返回结果
+#endif
+        
+    } @catch (NSException *exception) {
+        reject(@"NATIVE_ERROR_CODE", exception.reason, nil);  // 错误处理
+    }
+}
 
 
 

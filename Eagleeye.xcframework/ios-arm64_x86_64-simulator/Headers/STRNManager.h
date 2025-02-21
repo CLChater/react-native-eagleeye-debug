@@ -24,16 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameter appKey: key
 - (BOOL)initializeWithAppKey:(NSString *)appKey;
 
-/// 获取通用信息
-- (void)startGetInfo;
-
 // 插入用户属性 key - value
 - (void)insertUserPropertyWithKey:(NSString *)propertyKey value:(NSString *)propertyValue;
 // 删除用户属性 key - value
 - (void)deleteUserPropertyByKey:(NSString *)propertyKey;
 // 删除所有用户属性
 - (void)deleteDeviceInfoByTypeUserProperties;
-
 
 ///**
 // @abstract
@@ -93,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
                 properties:(NSDictionary *)properties
                  trackType:(NSString *)trackType;
 
+// 获取设备Id
+- (NSString *)getId;
 
 
 /// 停止定时器
