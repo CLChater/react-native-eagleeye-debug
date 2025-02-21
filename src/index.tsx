@@ -27,9 +27,9 @@ class EagleEyeAgent {
      * @param trackJson - 事件数据，JSON 格式的字符串
      * @param isReport - 是否立即上报
      */
-    static trackEvent(eventName: string, trackJson: string, isReport: boolean): void {
+    static trackEvent(eventName: string, trackJson: string): void {
         if (Hawkeye) {
-            Hawkeye.trackEvent(eventName, trackJson, isReport);
+            Hawkeye.trackEvent(eventName, trackJson);
         } else {
             console.warn('EagleEye module is not available.');
         }
