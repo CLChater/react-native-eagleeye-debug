@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 初始化
 /// - Parameter appKey: key
-- (BOOL)initializeWithAppKey:(NSString *)appKey;
+- (void)initializeWithAppKey:(NSString *)appKey completionHandler:(void (^)(BOOL success))completionHandler;
 
 // 插入用户属性 key - value
 - (void)insertUserPropertyWithKey:(NSString *)propertyKey value:(NSString *)propertyValue;
