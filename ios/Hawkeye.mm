@@ -52,29 +52,26 @@ RCT_EXPORT_METHOD(init:(NSString *)applyKey
     @try {
 #ifdef DEBUG
 
-//        [[STRNManager sharedInstance] initializeWithAppKey:applyKey completionHandler:^(BOOL success) {
-//            if (success) {
-//                
-//                NSLog(@"+++++++++++++++++++成功");
-//
-//                // 返回初始化成功的信息
-//                NSMutableDictionary *resultMap = [NSMutableDictionary dictionary];
-//                resultMap[@"suc"] = @(YES);
-//                resultMap[@"msg"] = [NSString stringWithFormat:@"SDK initialized with appKey: %@", applyKey];
-//                resolve(resultMap);
-//            } else {
-//                // 初始化失败时返回错误信息
-//                NSError *error = [NSError errorWithDomain:@"com.hawkeye.sdk" code:100 userInfo:@{NSLocalizedDescriptionKey: @"Invalid appKey or initialization failed."}];
-//                reject(@"NATIVE_ERROR_CODE", @"Initialization failed", error);
-//            }
-//        }];
+        [[STRNManager sharedInstance] initializeWithAppKey:applyKey completionHandler:^(BOOL success, NSError * _Nonnull error) {
+       
+            if (success) {
+                                
+                // 返回初始化成功的信息
+                NSMutableDictionary *resultMap = [NSMutableDictionary dictionary];
+                resultMap[@"suc"] = @(YES);
+                resultMap[@"msg"] = [NSString stringWithFormat:@"Hawkeye SDK initialized Success with appKey: %@", applyKey];
+                resolve(resultMap);
+            } else {
+                // 初始化失败时返回错误信息
+                NSString *errMsg = [NSString stringWithFormat:@"Hawkeye SDK initialized failed with Desc: %@", error.description];
+                reject(@"-1", errMsg, nil);
+            }
+        }];
 #else
         
         [[STRNManager sharedInstance] initializeWithAppKey:applyKey completionHandler:^(BOOL success) {
             if (success) {
-                
-                NSLog(@"+++++++++++++++++++成功");
-                
+                                
                 // 返回初始化成功的信息
                 NSMutableDictionary *resultMap = [NSMutableDictionary dictionary];
                 resultMap[@"suc"] = @(YES);
@@ -99,7 +96,7 @@ RCT_EXPORT_METHOD(init:(NSString *)applyKey
 RCT_EXPORT_METHOD(userProperty:(NSString *)key value:(NSString *)value){
     @try {
 #ifdef DEBUG
-//        [[STRNManager sharedInstance] insertUserPropertyWithKey:key value:value];
+        [[STRNManager sharedInstance] insertUserPropertyWithKey:key value:value];
 #else
         [[STRNManager sharedInstance] insertUserPropertyWithKey:key value:value];
 #endif
@@ -114,7 +111,7 @@ RCT_EXPORT_METHOD(userProperty:(NSString *)key value:(NSString *)value){
 RCT_EXPORT_METHOD(cleanUserProperty:(NSString *)key){
     @try {
 #ifdef DEBUG
-//        [[STRNManager sharedInstance] deleteUserPropertyByKey:key];
+        [[STRNManager sharedInstance] deleteUserPropertyByKey:key];
 #else
         [[STRNManager sharedInstance] deleteUserPropertyByKey:key];
 #endif
@@ -127,7 +124,7 @@ RCT_EXPORT_METHOD(cleanUserProperty:(NSString *)key){
 RCT_EXPORT_METHOD(cleanAllUserProperties){
     @try {
 #ifdef DEBUG
-//        [[STRNManager sharedInstance] deleteDeviceInfoByTypeUserProperties];
+        [[STRNManager sharedInstance] deleteDeviceInfoByTypeUserProperties];
 #else
         [[STRNManager sharedInstance] deleteDeviceInfoByTypeUserProperties];
 #endif
@@ -142,11 +139,11 @@ RCT_EXPORT_METHOD(trackEvent:(NSString *)eventName trackJson:(NSString *)trackJs
     @try {
     
 #ifdef DEBUG
-//        if (trackJson.length > 0) {
-//            NSDictionary *propertyDict = [JSONUtils jsonStringToDictionary:trackJson];
-//            NSDictionary *properties = [STRNEventProperty eventProperties:propertyDict];
-//            [[STRNManager sharedInstance] trackWithEventName:eventName properties: properties trackType: STDB_TYPE_TRACK_MANUAL];
-//        }
+        if (trackJson.length > 0) {
+            NSDictionary *propertyDict = [JSONUtils jsonStringToDictionary:trackJson];
+            NSDictionary *properties = [STRNEventProperty eventProperties:propertyDict];
+            [[STRNManager sharedInstance] trackWithEventName:eventName properties: properties trackType: STDB_TYPE_TRACK_MANUAL];
+        }
 #else
         if (trackJson.length > 0) {
             NSDictionary *propertyDict = [JSONUtils jsonStringToDictionary:trackJson];
@@ -165,7 +162,7 @@ RCT_EXPORT_METHOD(trackEvent:(NSString *)eventName trackJson:(NSString *)trackJs
 RCT_EXPORT_METHOD(trackViewClick:(int)viewId){
     @try {
 #ifdef DEBUG
-//        [[STRNManager sharedInstance] trackViewClick:@(viewId)];
+        [[STRNManager sharedInstance] trackViewClick:@(viewId)];
 #else
         [[STRNManager sharedInstance] trackViewClick:@(viewId)];
 #endif
@@ -179,7 +176,7 @@ RCT_EXPORT_METHOD(trackViewClick:(int)viewId){
 RCT_EXPORT_METHOD(saveViewProperties:(int)viewId clickable:(BOOL)clickable viewProperties:(NSDictionary *)viewProperties){
     @try {
 #ifdef DEBUG
-//        [[STRNManager sharedInstance] prepareView:@(viewId) clickable:clickable paramters:viewProperties];
+        [[STRNManager sharedInstance] prepareView:@(viewId) clickable:clickable paramters:viewProperties];
 #else
         [[STRNManager sharedInstance] prepareView:@(viewId) clickable:clickable paramters:viewProperties];
 #endif
@@ -191,12 +188,12 @@ RCT_EXPORT_METHOD(saveViewProperties:(int)viewId clickable:(BOOL)clickable viewP
 RCT_EXPORT_METHOD(trackViewScreen:(NSDictionary *)params) {
     @try {
 #ifdef DEBUG
-//        if (params) {
-//            // 自动采集页面浏览时 url 在 params
-//            NSString *url = params[@"hawkeyedataurl"];
-//            NSDictionary *properties = params[@"hawkeyedataparams"];
-//            [[STRNManager sharedInstance] trackViewScreen:url properties:properties autoTrack:YES];
-//        }
+        if (params) {
+            // 自动采集页面浏览时 url 在 params
+            NSString *url = params[@"hawkeyedataurl"];
+            NSDictionary *properties = params[@"hawkeyedataparams"];
+            [[STRNManager sharedInstance] trackViewScreen:url properties:properties autoTrack:YES];
+        }
 #else
         if (params) {
             // 自动采集页面浏览时 url 在 params
@@ -218,8 +215,8 @@ RCT_EXPORT_METHOD(getId:(RCTPromiseResolveBlock)resolve
     @try {
         
 #ifdef DEBUG
-//        NSString *idStr = [[STRNManager sharedInstance] getId];
-//        resolve(idStr);  // 返回结果
+        NSString *idStr = [[STRNManager sharedInstance] getId];
+        resolve(idStr);  // 返回结果
 #else
         NSString *idStr = [[STRNManager sharedInstance] getId];
         resolve(idStr);  // 返回结果
