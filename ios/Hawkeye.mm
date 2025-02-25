@@ -53,9 +53,7 @@ RCT_EXPORT_METHOD(init:(NSString *)applyKey
 #ifdef DEBUG
 
         [[STRNManager sharedInstance] initializeWithAppKey:applyKey completionHandler:^(BOOL success, NSError * _Nonnull error) {
-       
             if (success) {
-                                
                 // 返回初始化成功的信息
                 NSMutableDictionary *resultMap = [NSMutableDictionary dictionary];
                 resultMap[@"suc"] = @(YES);
@@ -69,21 +67,19 @@ RCT_EXPORT_METHOD(init:(NSString *)applyKey
         }];
 #else
         
-        [[STRNManager sharedInstance] initializeWithAppKey:applyKey completionHandler:^(BOOL success) {
+        [[STRNManager sharedInstance] initializeWithAppKey:applyKey completionHandler:^(BOOL success, NSError * _Nonnull error) {
             if (success) {
-                                
                 // 返回初始化成功的信息
                 NSMutableDictionary *resultMap = [NSMutableDictionary dictionary];
                 resultMap[@"suc"] = @(YES);
-                resultMap[@"msg"] = [NSString stringWithFormat:@"SDK initialized with appKey: %@", applyKey];
+                resultMap[@"msg"] = [NSString stringWithFormat:@"Hawkeye SDK initialized Success with appKey: %@", applyKey];
                 resolve(resultMap);
             } else {
                 // 初始化失败时返回错误信息
-                NSError *error = [NSError errorWithDomain:@"com.hawkeye.sdk" code:100 userInfo:@{NSLocalizedDescriptionKey: @"Invalid appKey or initialization failed."}];
-                reject(@"NATIVE_ERROR_CODE", @"Initialization failed", error);
+                NSString *errMsg = [NSString stringWithFormat:@"Hawkeye SDK initialized failed with Desc: %@", error.description];
+                reject(@"-1", errMsg, nil);
             }
         }];
-        
 #endif
 
     }@catch (NSException *exception) {
