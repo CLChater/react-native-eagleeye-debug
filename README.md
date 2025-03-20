@@ -104,7 +104,38 @@ EagleEyeAgent.getId().then( id => {
 ```
 
 ### iOS
+如需要获取IDFA权限，可在同意用户协议后获取权限，并在项目Info.plist中添加IDFA权限描述
+示例
 
-需要在项目Info.plist中添加IDFA权限描述
+```
+import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
+
+ initIDFAPermissions = async () => {
+    //ios获取IDFA权限
+    setTimeout(async () => {
+      try {
+        if (Platform.OS === 'ios') {
+          const permission = PERMISSIONS.IOS.APP_TRACKING_TRANSPARENCY;
+          const result = await check(permission);
+
+          if (result === RESULTS.DENIED) {
+            const requestResult = await request(permission);
+            if (requestResult === RESULTS.GRANTED) {
+              console.log('IDFA权限通过');
+            } else {
+              console.log('IDFA权限被拒绝');
+            }
+          } else if (result === RESULTS.GRANTED) {
+            console.log('IDFA权限通过');
+          } else {
+            console.log('IDFA权限状态:', result);
+          }
+        }
+      } catch (error) {
+        console.error('获取IDFA权限时出错:', error);
+      }
+    }, 1000);
+  };
+```
 
 
