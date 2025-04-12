@@ -13,6 +13,11 @@ RN版本的统计和反作弊的SDK
 2. 运行命令
 
 ```
+！！！Warning Tip！！！
+
+插件：react-navigation，目前支持5.*.* 以上版本，后续插件版本升级会做相对更新！！！
+
+
 node node_modules/react-native-eagleeye/HawkeyeDataRNHook.js -run
 ```
 
@@ -31,6 +36,7 @@ allprojects {
     repositories {
         ......
         maven { url "https://raw.githubusercontent.com/CLChater/sdk_eagleeye/main" } //新增
+        //     maven { url "https://gitee.com/simitalk/sdk_eagleeye/raw/main" } //gitee 镜像
     }
 }
 ```

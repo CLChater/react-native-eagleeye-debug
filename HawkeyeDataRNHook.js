@@ -452,11 +452,12 @@ eagleeyadataHookGestureButtonsRN = function (reset = false) {
         }
         console.log(`found GestureButtons: ${onefile}`);
         // 获取 hook 的代码插入的位置
-        var scriptStr = 'this.props.onPress(active);';
+        var scriptStr = 'this.props.onPress(active);';//TODO 2.25.0 'this.props.onPress(pointerInside);'
         var hookIndex = fileContent.indexOf(scriptStr);
         // 判断文件是否异常，不存在 this.props.onPress(active); 导致无法 hook 点击事件
         if (hookIndex == -1) {
           throw "Can't not find this.props.onPress(active); ";
+         //TODO throw "Can't not find this.props.onPress(pointerInside); ";
         }
         // 插入 hook 代码
         var hookedContent = `${fileContent.substring(
@@ -661,16 +662,16 @@ function lastArgumentName(content, index) {
 }
 
 // 全部 hook 文件恢复
-resetAlleagleeyadataHookRN = function () {
-  eagleeyadataResetRN(RNClickFilePath);
-  eagleeyadataHookClickableRN(true);
-  // 2 期
-  eagleeyadataHookSliderRN(true);
-  eagleeyadataHookSwitchRN(true);
-  eagleeyadataHookSegmentedControlRN(true);
-  eagleeyadataHookGestureButtonsRN(true);
-  // 3 期
-  eagleeyadataResetRN(RNClickPressabilityFilePath);
+resetAlleagleeyadataHookRN = function () {//TODO 临时修改屏蔽
+  // eagleeyadataResetRN(RNClickFilePath);
+  // eagleeyadataHookClickableRN(true);
+  // // 2 期
+  // eagleeyadataHookSliderRN(true);
+  // eagleeyadataHookSwitchRN(true);
+  // eagleeyadataHookSegmentedControlRN(true);
+  // eagleeyadataHookGestureButtonsRN(true);
+  // // 3 期
+  // eagleeyadataResetRN(RNClickPressabilityFilePath);
   eagleeyadataResetRN(reactNavigationPath5X);
 };
 // 全部 hook 文件
@@ -678,32 +679,32 @@ alleagleeyadataHookRN = function () {
   if (ignoreScreen) {
     console.log('ignore screen');
   }
-  if (userPackageJson && userPackageJson['eagleEyaData']) {
-    var eagleEyaData = userPackageJson['eagleEyaData'];
-    if (eagleEyaData['ignoreClick']) {
-      console.log('ignore click');
-    } else {
-      eagleeyadataHookClickRN(RNClickFilePath);
-      eagleeyadataHookClickableRN();
-      // 2 期
-      eagleeyadataHookSliderRN();
-      eagleeyadataHookSwitchRN();
-      eagleeyadataHookSegmentedControlRN();
-      eagleeyadataHookGestureButtonsRN(false);
-      // 3 期
-      eagleeyadataHookPressabilityClickRN(RNClickPressabilityFilePath);
-    }
-  } else {
-    eagleeyadataHookClickRN(RNClickFilePath);
-    eagleeyadataHookClickableRN();
-    // 2 期
-    eagleeyadataHookSliderRN();
-    eagleeyadataHookSwitchRN();
-    eagleeyadataHookSegmentedControlRN();
-    eagleeyadataHookGestureButtonsRN(false);
-    // 3 期
-    eagleeyadataHookPressabilityClickRN(RNClickPressabilityFilePath);
-  }
+  // if (userPackageJson && userPackageJson['eagleEyaData']) {//TODO 临时修改屏蔽
+  //   var eagleEyaData = userPackageJson['eagleEyaData'];
+  //   if (eagleEyaData['ignoreClick']) {
+  //     console.log('ignore click');
+  //   } else {
+  //     eagleeyadataHookClickRN(RNClickFilePath);
+  //     eagleeyadataHookClickableRN();
+  //     // 2 期
+  //     eagleeyadataHookSliderRN();
+  //     eagleeyadataHookSwitchRN();
+  //     eagleeyadataHookSegmentedControlRN();
+  //     eagleeyadataHookGestureButtonsRN(false);
+  //     // 3 期
+  //     eagleeyadataHookPressabilityClickRN(RNClickPressabilityFilePath);
+  //   }
+  // } else {
+  //   eagleeyadataHookClickRN(RNClickFilePath);
+  //   eagleeyadataHookClickableRN();
+  //   // 2 期
+  //   eagleeyadataHookSliderRN();
+  //   eagleeyadataHookSwitchRN();
+  //   eagleeyadataHookSegmentedControlRN();
+  //   eagleeyadataHookGestureButtonsRN(false);
+  //   // 3 期
+  //   eagleeyadataHookPressabilityClickRN(RNClickPressabilityFilePath);
+  // }
   eagleeyadataHookNavigation5();
 };
 // 命令行
