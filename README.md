@@ -1,13 +1,13 @@
-# react-native-eagleeye
+# react-native-eagleeye-debug
 
-RN版本的统计和反作弊的SDK
+RN版本的统计和反作弊的SDK(！！！仅用于测试！！！)
 
 ### Android初始化
 
 1. react native 引用插件
 
 ```
-"react-native-eagleeye": "git+https://github.com/CLChater/react-native-eagleeye",
+"react-native-eagleeye": "git+https://github.com/CLChater/react-native-eagleeye-debug",
 ```
 
 2. 运行命令
@@ -15,8 +15,9 @@ RN版本的统计和反作弊的SDK
 ```
 ！！！Warning Tip！！！
 
-插件：react-navigation，目前支持5.*.* 以上版本，后续插件版本升级会做相对更新！！！
+插件：react-navigation，目前支持5.*.* / 6.*.* 版本。
 
+！！！后续插件版本升级会做相对更新！！！
 
 node node_modules/react-native-eagleeye/HawkeyeDataRNHook.js -run
 ```
