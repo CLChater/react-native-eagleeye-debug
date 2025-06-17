@@ -9,7 +9,8 @@ var ignoreScreen = false;
 if (userPackageJson && userPackageJson['eagleEyaData'] && userPackageJson['eagleEyaData']['ignoreScreen']) {
   ignoreScreen = true;
 }
-var reactNavigationPath5X = dir + '/@react-navigation/core/src/BaseNavigationContainer.tsx';
+// var reactNavigationPath5X = dir + '/@react-navigation/core/src/BaseNavigationContainer.tsx';
+var reactNavigationPath5X = dir + '/@react-navigation/core/lib/module/BaseNavigationContainer.js';
 // 自定义变量
 
 var RNClickFilePath = dir + '/react-native/Libraries/Components/Touchable/Touchable.js';
@@ -120,7 +121,8 @@ var eagleeyadataNavigation5HookCode = `
             return undefined;
           }
         while (state.routes[state.index].state !== undefined) {
-            state = state.routes[state.index].state as NavigationState;
+            state = state.routes[state.index].state;
+            // state = state.routes[state.index].state as NavigationState;
           }                                                                                                                                                                                                                                                              
           return state.routes[state.index].name;
       }
@@ -170,6 +172,7 @@ var eagleeyadataNavigation5HookCode = `
           }
         }
 		var dataModule = ReactNative?.NativeModules?.Hawkeye;
+		console.log('tvs=r4',saProperties);
 		dataModule?.trackViewScreen && dataModule.trackViewScreen(saProperties);
 	}
 	trackViewScreen(getRootState());
